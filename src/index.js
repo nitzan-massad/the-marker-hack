@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import emailjs from 'emailjs-com';
+import emailkey from "./emailkey";
+
+//import background from 'public/Images/background1.jpeg'
 //import App from './App';
-import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -32,31 +35,42 @@ function App() {
             const fullUrl = urlPrefix+pathName
             return fullUrl
         }catch (e){
-            alert("not Good Url")
+            //alert("not Good Url")
         }
 
     }
 
-    function generateLinkAndDisplay() {
+    function generateLinkAndDisplay(e) {
         const link =  generateLink()
         //linkToDisplay = link
         console.log(`nitz in generateLinkAndDisplay the link is: ${link}`)
         //setLinkToDisplay(link)
         //window.location.href =link
         setLinkToDisplay(link)
+        handleEmail(link)
     }
+    const handleEmail = (e) => {
+        console.log('i am here in email')
+        emailjs.send(emailkey.SERVICE_ID, emailkey.TEMPLATE_ID, {'LINK': e},emailkey.USER_ID)
+            .then((result) => {
+                    console.log("Message Sent, We will get back to you shortly "+result.text);
+                },
+                (error) => {
+                    console.log("An error occurred, Please try again "+ error.text);
+                });
+    };
 
     return (
-        <div className="center">
-            <div>
-                <form >
-                    <input ref={textInput} type="text" name="urlLink"/>
+        <div className="center" >
+            <div className={'inputDiv'}>
+                <form className={'form'} >
+                    <input ref={textInput} className={'inputStyle'} type="text" name="urlLink" placeholder={'Insert The Marker URL Here'} />
                 </form>
             </div>
-            <div>
-                <button className={'center'} type="button" onClick={generateLinkAndDisplay}>Generate Link</button>
+            <div className={'buttonDiv'}>
+                <button className={'center button'} type="button"onClick={generateLinkAndDisplay}><span>Generate Link </span></button>
             </div>
-            <div>
+            <div className={'linkDiv'}>
                 <p><a href={linkToDisplay}>{linkToDisplay}</a></p>
             </div>
         </div>
