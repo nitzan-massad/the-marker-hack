@@ -1,8 +1,8 @@
-name: CI/CD
+name:  CI/CD the-marker-hack
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 
 jobs:
