@@ -8,7 +8,9 @@ export default function App() {
     const [linkToDisplay, setLinkToDisplay] = useState('')
     let textInput = React.createRef();
 
-    let urlPrefix ='https://www.google.com/amp/s/www.themarker.com/amp'
+    let theMarkerUrlPrefix ='https://www.google.com/amp/s/www.themarker.com/amp'
+    let urlPrefix ='https://www.google.com/amp/s/'
+    let ampPrefix ='/amp'
 
     function generateLink(link) {
         //alert(textBoxInputValue)
@@ -16,10 +18,12 @@ export default function App() {
         try {
             url = new URL(link);
             const pathName =url.pathname
-            const fullUrl = urlPrefix+pathName
-            return fullUrl
+            const hostName =url.hostname
+            const joinedUrl = [urlPrefix,hostName,ampPrefix,pathName].join('')
+
+            return joinedUrl
         }catch (e){
-            alert("not Good Url")
+            //alert("not Good Url")
         }
 
     }
@@ -46,7 +50,7 @@ export default function App() {
     }
     const handleEmail = (e) => {
         console.log('i am here in email')
-
+        
         emailJs.send(emailKey.SERVICE_ID, emailKey.TEMPLATE_ID, {'LINK': e},emailKey.USER_ID)
             .then((result) => {
                     console.log("Message Sent, We will get back to you shortly "+result.text);
