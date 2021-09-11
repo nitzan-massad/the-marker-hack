@@ -1,14 +1,13 @@
 import React, {useState} from "react";
 import emailJs from "emailjs-com";
-import emailKey from "./emailkey";
-
+import emailKey from "../emailkey";
+import './App.css';
 export default function App() {
 
-    const [textBoxInputValue, setTextBoxInputValue] = useState(' ')
     const [linkToDisplay, setLinkToDisplay] = useState('')
     let textInput = React.createRef();
 
-    let theMarkerUrlPrefix ='https://www.google.com/amp/s/www.themarker.com/amp'
+    //let theMarkerUrlPrefix ='https://www.google.com/amp/s/www.themarker.com/amp'
     let urlPrefix ='https://www.google.com/amp/s/'
     let ampPrefix ='/amp'
 
@@ -45,12 +44,13 @@ export default function App() {
         console.log(`nitz in generateLinkAndDisplay the link is: ${link}`)
 
         setLinkToDisplay(link)
-        if (link !== undefined && link !=='' && link !== ' ')
+        if (link !== undefined && link !=='' && link !== ' ' && process.env.NODE_ENV !=='development') {
+            //console.log(`nitz process.env.NODE_ENV: ${process.env.NODE_ENV}`)
             handleEmail(link)
+        }
     }
     const handleEmail = (e) => {
         console.log('i am here in email')
-        
         emailJs.send(emailKey.SERVICE_ID, emailKey.TEMPLATE_ID, {'LINK': e},emailKey.USER_ID)
             .then((result) => {
                     console.log("Message Sent, We will get back to you shortly "+result.text);
