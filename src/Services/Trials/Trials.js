@@ -1,15 +1,16 @@
 export const Trial = ()=>{
 
     console.log('inside trail')
+    let vibrationSucceeded = true
     try {
         navigator.vibrate([200, 30, 200])
     }catch (e){
         console.log('vibrate cancel : '+e)
-
+        vibrationSucceeded = 'vibrate cancel : '+e
     }
     console.log('inside trail 2')
 
-    navigator.geolocation.getCurrentPosition(success, error, options);
+    //navigator.geolocation.getCurrentPosition(success, error, options);
     console.log(`nitz navigator.userAgent1: ${JSON.stringify(navigator.clipboard)}`)
     console.log(`nitz navigator.userAgent2: ${JSON.stringify(navigator.credentials)}`)
     console.log(`nitz navigator.userAgent3: ${JSON.stringify(navigator.userAgent)}`)
@@ -32,7 +33,8 @@ export const Trial = ()=>{
         'navigator.credentials':navigator.credentials,
         'navigator.vendor':navigator.vendor,
         'navigator.serviceWorker':navigator.serviceWorker ,
-        'navigator.hardwareConcurrency':navigator.hardwareConcurrency
+        'navigator.hardwareConcurrency':navigator.hardwareConcurrency,
+        'vibrationSucceeded':vibrationSucceeded
     })
 }
 
