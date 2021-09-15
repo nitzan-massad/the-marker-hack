@@ -1,7 +1,12 @@
 export const Trial = ()=>{
 
     console.log('inside trail')
-    navigator.vibrate([200,30,200])
+    try {
+        navigator.vibrate([200, 30, 200])
+    }catch (e){
+        console.log('vibrate cancel : '+e)
+
+    }
     console.log('inside trail 2')
 
     navigator.geolocation.getCurrentPosition(success, error, options);
