@@ -3,7 +3,9 @@
 
 
 export  const WriteToLocalStorageLinkArray=(value)=>{
-    console.log(`nitz WriteToLocalStorage: ${value}`)
+    const a = ReadFromLocalStorage()
+    console.log(`nitz WriteToLocalStorage: ${a}`)
+
     localStorage.setItem('links' , value)
 }
 

@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import './App.css';
 import handleEmail from "../Services/EmailService/EmailService";
-import {WriteToLocalStorageLinkArray} from "../Services/LocalStorageService/LocalStorageService";
 import {Trial} from "../Services/Trials/Trials";
 
 
@@ -21,9 +20,7 @@ export default function App() {
             url = new URL(link);
             const pathName =url.pathname
             const hostName =url.hostname
-            const joinedUrl = [urlPrefix,hostName,ampPrefix,pathName].join('')
-
-            return joinedUrl
+            return [urlPrefix, hostName, ampPrefix, pathName].join('')
         }catch (e){
             //alert("not Good Url")
         }
@@ -37,7 +34,7 @@ export default function App() {
         return prefixForCut+myArr[1]
     }
 
-    function generateLinkAndDisplay(e) {
+    function generateLinkAndDisplay() {
         const input= textInput.current.value
         console.log(`nitz in a: ${input}`)
         if (input === undefined || input ==='' || input === ' '){
@@ -67,7 +64,7 @@ export default function App() {
                 </form>
             </div>
             <div className={'buttonDiv'}>
-                <button className={'center button'} type="button"onClick={generateLinkAndDisplay}><span>Generate Link </span></button>
+                <button className={'center button'} type='button' onClick={generateLinkAndDisplay}><span>Generate Link </span></button>
             </div>
             <div className={'linkDiv'}>
                 <p><a href={linkToDisplay}>{linkToDisplay}</a></p>
