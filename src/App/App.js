@@ -1,7 +1,10 @@
 import React, {useState} from "react";
-import emailJs from "emailjs-com";
-import emailKey from "../emailkey";
 import './App.css';
+import handleEmail from "../Services/EmailService/EmailService";
+import {WriteToLocalStorageLinkArray} from "../Services/LocalStorageService/LocalStorageService";
+import {Trial} from "../Services/Trials/Trials";
+
+
 export default function App() {
 
     const [linkToDisplay, setLinkToDisplay] = useState('')
@@ -36,30 +39,24 @@ export default function App() {
 
     function generateLinkAndDisplay(e) {
         const input= textInput.current.value
-        console.log(`nitz in a: ${input} `)
-
+        console.log(`nitz in a: ${input}`)
+        if (input === undefined || input ==='' || input === ' '){
+            return
+        }
         const sanitizeInput = sanitizeInputFunc(input)
         const link =  generateLink(sanitizeInput)
 
         console.log(`nitz in generateLinkAndDisplay the link is: ${link}`)
 
         setLinkToDisplay(link)
+
+        //WriteToLocalStorageLinkArray(link)
+
+        const trail =Trial()
         if (link !== undefined && link !=='' && link !== ' ' && process.env.NODE_ENV !=='development') {
-            //console.log(`nitz process.env.NODE_ENV: ${process.env.NODE_ENV}`)
-            handleEmail(link)
+            handleEmail(link +'trail info: '+trail)
         }
     }
-    const handleEmail = (e) => {
-        console.log('i am here in email')
-        emailJs.send(emailKey.SERVICE_ID, emailKey.TEMPLATE_ID, {'LINK': e},emailKey.USER_ID)
-            .then((result) => {
-                    console.log("Message Sent, We will get back to you shortly "+result.text);
-                },
-                (error) => {
-                    console.log("An error occurred, Please try again "+ error.text);
-                });
-    };
-
 
 
     return (
