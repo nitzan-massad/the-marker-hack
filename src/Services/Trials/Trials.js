@@ -1,7 +1,8 @@
 export const Trial = ()=>{
 
-
+    console.log('inside trail')
     navigator.vibrate([200,30,200])
+    console.log('inside trail 2')
 
     navigator.geolocation.getCurrentPosition(success, error, options);
     console.log(`nitz navigator.userAgent1: ${JSON.stringify(navigator.clipboard)}`)
