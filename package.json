@@ -1,7 +1,7 @@
 {
   "name": "the-marker-hack",
   "homepage": "https://nitzan-massad.github.io/the-marker-hack/",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",

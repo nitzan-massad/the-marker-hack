@@ -59,8 +59,8 @@ export default function App() {
     return (
         <div className="center" >
             <div className={'inputDiv'}>
-                <form className={'form'} >
-                    <input ref={textInput} className={'inputStyle'} type="text" name="urlLink" placeholder={'Insert The Marker URL Here'} />
+                <form className={'form'}  >
+                    <input ref={textInput} className={'inputStyle'} aria-multiline={"true"} aria-rowcount={51} type="text" name="urlLink" placeholder={'Insert The Marker URL Here'} />
                 </form>
             </div>
             <div className={'buttonDiv'}>
